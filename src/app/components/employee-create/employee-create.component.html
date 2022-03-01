@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 register-employee">
+    <!-- form card register -->
+    <div class="card-body">
+      <h3>Create a new employee</h3>
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+      
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <input class="form-control" type="text" formControlName="name" name="inputName">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="(submitted && myForm.name.errors?.minlength)">
+            Name should be longer than 3 characters.
+          </div>
+
+          
+          
+        </div>
+
+
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input class="form-control" type="text" formControlName="email" name="inputEmail">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.required">
+            Enter your email.
+          </div>
+          <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.pattern">
+            Enter valid email.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Your role</label>
+          <select class="custom-select form-control" (change)="updateProfile($event.target.value)"
+            formControlName="role" name="inputPassword">
+            <option value="">Optional...</option>
+            <option *ngFor="let employeeProfile of EmployeeProfile" value="{{employeeProfile}}">{{employeeProfile}}
+            </option>
+          </select>
+          <!-- error -->
+          
+        </div>
+
+        <div class="form-group">
+          <label for="inputVerify">Mobile No</label>
+          <input class="form-control" type="text" formControlName="phoneNumber" name="inputVerify">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.phoneNumber.errors?.required">
+            Enter your phone number.
+          </div>
+          <div class="invalid-feedback" *ngIf="submitted && myForm.phoneNumber.errors?.pattern">
+            Enter Numbers Only
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="subscribe">
+            Subscribe to our newsletter
+          </label>
+          <input formControlName="subscribe" class="form-control" name="subscribe" type="checkbox" value="" id="subscribe" checked />
+          
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-info btn-lg btn-block" type="submit">Register</button>
+        </div>
+      </form>
+
+    </div>
+  </div><!-- form card register -->
+</div>
